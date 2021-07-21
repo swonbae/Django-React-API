@@ -25,3 +25,4 @@ cd
 python manage.py runserver
 ```
 To access admin page, navigate to `http://localhost:8000/admin`
+To get articles list, navigate to `http://localhost:8000/articles`
