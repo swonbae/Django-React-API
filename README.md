@@ -24,5 +24,6 @@ Run server
 cd
 python manage.py runserver
 ```
-To access admin page, navigate to `http://localhost:8000/admin`\
-To get articles list, navigate to `http://localhost:8000/articles`
+Admin Page URL: `http://localhost:8000/admin`\
+Articles List API or View URL: `http://localhost:8000/api/articles`\
+User List API or View URL: `http://localhost:8000/api/users`
