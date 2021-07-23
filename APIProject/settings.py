@@ -38,8 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'api',
 ]
+
+# REST_FRAMEWORK = {                                      # Global setting
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',   # Allow only access with authentication
+#         # 'rest_framework.permissions.AllowAny',        # Allow any access without authentication
+#     ]
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
