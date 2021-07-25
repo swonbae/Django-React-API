@@ -1,7 +1,9 @@
-// import logo from './logo.svg';
 import "./App.css";
-import ClassComponent from "./components/ClassComponent";
-import FunctionComponent from "./components/FunctionComponent";
+import Example from "./components/Example";
+import Example2 from "./components/Example2";
+import Form from "./components/Form";
+import MyFragement from "./components/MyFragement";
+import Name from "./components/Name";
 
 function App() {
   function clicked() {
@@ -10,8 +12,11 @@ function App() {
 
   return (
     <div className="container">
-      <FunctionComponent name="Swon" />
-      <ClassComponent email="no-reply@gmail.com" myClick={clicked} />
+      {/* <Name />
+      <Example names={["Python", "Java", "JavaScript", "C#"]} />
+      <Example2 names={["React", "React Native", "Django"]} />
+      <Form /> */}
+      <MyFragement />
     </div>
   );
 }
