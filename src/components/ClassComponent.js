@@ -4,7 +4,7 @@ class ClassComponent extends Component {
     render() {
         return(
             <h2>
-                Inside of Class Component
+                My email is {this.props.email}
             </h2>
         )
     }

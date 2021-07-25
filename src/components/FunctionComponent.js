@@ -1,9 +1,9 @@
 import React from 'react'
 
-function FunctionComponent() {
+function FunctionComponent(props) {
     return (
         <h2>
-            Inside of Function Component
+            My name is {props.name} {props.lastname}
         </h2>
     )
 }

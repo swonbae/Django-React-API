@@ -6,9 +6,8 @@ import FunctionComponent from './components/FunctionComponent';
 function App() {
   return (
     <div className="App">
-      <h1>React Application</h1>
-      <ClassComponent />
-      <FunctionComponent />
+      <FunctionComponent name="Swon" lastname="Bae" />
+      <ClassComponent email = "no-reply@gmail.com" />
     </div>
   );
 }
