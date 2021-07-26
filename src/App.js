@@ -1,22 +1,15 @@
 import "./App.css";
-import Example from "./components/Example";
-import Example2 from "./components/Example2";
-import Form from "./components/Form";
-import MyFragement from "./components/MyFragement";
-import Name from "./components/Name";
+import ComponentA from "./components/ComponentA";
+import React from "react";
+
+export const MyContext = React.createContext();
 
 function App() {
-  function clicked() {
-    alert("Clicked from App");
-  }
-
   return (
     <div className="container">
-      {/* <Name />
-      <Example names={["Python", "Java", "JavaScript", "C#"]} />
-      <Example2 names={["React", "React Native", "Django"]} />
-      <Form /> */}
-      <MyFragement />
+      <MyContext.Provider value="This is value from context">
+        <ComponentA />
+      </MyContext.Provider>
     </div>
   );
 }
