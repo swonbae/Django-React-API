@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function CounterHook() {
   const [count, setCount] = useState(0);
@@ -9,6 +9,15 @@ function CounterHook() {
     "Article Two",
     "Article Three",
   ]);
+
+  //   useEffect(() => {
+  //     console.log("useEffect is called");
+  //   }, [count, text]);
+
+  useEffect(() => {
+    console.log("useEffect is called");
+    document.title = `You have clicked ${count} times`;
+  });
 
   const addArticle = () => {
     setArticles([...articles, "New Article"]);
@@ -50,10 +59,14 @@ function CounterHook() {
       <br />
 
       {articles.map((article) => {
-        return <h2>{article}</h2>;
+        return <h2 key={article}>{article}</h2>;
       })}
       <button className="btn btn-primary" onClick={addArticle}>
         Add Article
+      </button>
+
+      <button className="btn btn-primary" onClick={() => setCount(count + 1)}>
+        Change Title
       </button>
     </div>
   );
