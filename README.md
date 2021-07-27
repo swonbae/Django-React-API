@@ -1,7 +1,8 @@
 # DjangoReactAPI
-Full Stack in Python and ReactJS Practice (Back-end API using Django REST Framework + Front-end using ReactJS)
+Full Stack in Python and ReactJS Practice (Back-end API using Django REST Framework + Front-end using ReactJS)\
+`main` branch = Django Back-end, `React` branch = React Front-end code
 
-## Setup
+## Django Setup
 
 Install the dependencies
 ```sh
@@ -24,5 +25,6 @@ Run server
 cd
 python manage.py runserver
 ```
-To access admin page, navigate to `http://localhost:8000/admin`\
-To get articles list, navigate to `http://localhost:8000/articles`
+Admin Page URL: `http://localhost:8000/admin`\
+Articles List API or View URL: `http://localhost:8000/api/articles`\
+User List API or View URL: `http://localhost:8000/api/users`
