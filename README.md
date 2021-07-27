@@ -4,10 +4,11 @@ Full Stack in Python and ReactJS Practice (Back-end API using Django REST Framew
 
 ## Django Setup
 
-Install the dependencies
+Install dependencies
 ```sh
 pip install django
 pip install djangorestframework
+pip install django-cors-headers
 ```
 
 Data migration
