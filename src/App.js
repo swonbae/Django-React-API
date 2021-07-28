@@ -2,34 +2,47 @@ import "./App.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import ArticleList from "./components/ArticleList";
+import APIService from "./APIService";
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/articles/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Token REPLACE_WITH_YOUR_TOKEN",
-      },
-    })
+    APIService.FetchArticles()
       .then((res) => {
+        setLoading(false);
         if (res.ok) {
-          setArticles(res.json());
+          return res.json();
         } else {
-          console.log(res);
-          setMessage(res.status + " - " + res.statusText);
+          setMessage(`Cannot fetch data: ${res.statusText} (${res.status})`);
         }
       })
+      .then((res) => setArticles(res))
       .catch((error) => {
-        console.log(error);
-        setMessage(error);
+        setMessage(error.toString());
+        setLoading(false);
       });
-    setLoading(false);
   }, []);
+
+  const editBtn = (article) => {
+    setSelectedArticle(article);
+  };
+
+  const updateArticles = (updatedArticle) => {
+    const newArticles = articles.map((article) => {
+      if (article.id === updatedArticle.id) {
+        return updatedArticle;
+      } else {
+        return article;
+      }
+    });
+
+    setArticles(newArticles);
+    setSelectedArticle(null);
+  };
 
   return (
     <div className="App">
@@ -41,7 +54,12 @@ function App() {
       ) : message ? (
         <h2>{message}</h2>
       ) : (
-        <ArticleList articles={articles} />
+        <ArticleList
+          articles={articles}
+          editBtn={editBtn}
+          selectedArticle={selectedArticle}
+          updateArticles={updateArticles}
+        />
       )}
     </div>
   );
