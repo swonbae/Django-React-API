@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./Form";
 
 function ArticleList(props) {
-  const { articles, selectedArticle, updateArticles } = props;
+  const { articles, selectedArticle, articleUpdated, articleInserted } = props;
 
   const editBtn = (article) => {
     props.editBtn(article);
@@ -33,13 +33,21 @@ function ArticleList(props) {
               {selectedArticle && selectedArticle.id === article.id && (
                 <Form
                   article={selectedArticle}
-                  updateArticles={updateArticles}
+                  articleUpdated={articleUpdated}
                 />
               )}
               <hr className="hrclass" />
             </div>
           );
-        })}
+        })
+      }
+      {
+        selectedArticle && !selectedArticle.id &&
+        <Form
+          article={selectedArticle}
+          articleInserted={articleInserted}
+        />
+      }
     </div>
   );
 }

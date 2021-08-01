@@ -31,7 +31,11 @@ function App() {
     setSelectedArticle(article);
   };
 
-  const updateArticles = (updatedArticle) => {
+  const addBtn = () => {
+    setSelectedArticle({ 'title': '', 'description': '' });
+  };
+
+  const articleUpdated = (updatedArticle) => {
     const newArticles = articles.map((article) => {
       if (article.id === updatedArticle.id) {
         return updatedArticle;
@@ -44,23 +48,40 @@ function App() {
     setSelectedArticle(null);
   };
 
+  const articleInserted = (insertedArticle) => {
+    const newArticles = [...articles, insertedArticle]
+
+    setArticles(newArticles);
+    setSelectedArticle(null);
+  };
+
   return (
     <div className="App">
-      <h1>Django and ReactJS</h1>
+      <div className="row">
+        <div className="col">
+          <h1>Django and ReactJS</h1>
+          <br />
+        </div>
+        <div className="col">
+          <button className="btn btn-primary" onClick={addBtn}>Add Article</button>
+        </div>
+      </div>
       <br />
-      <br />
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : message ? (
-        <h2>{message}</h2>
-      ) : (
-        <ArticleList
-          articles={articles}
-          editBtn={editBtn}
-          selectedArticle={selectedArticle}
-          updateArticles={updateArticles}
-        />
-      )}
+      {
+        loading ? (
+          <h2>Loading...</h2>
+        ) : message ? (
+          <h2>{message}</h2>
+        ) : (
+          <ArticleList
+            articles={articles}
+            editBtn={editBtn}
+            selectedArticle={selectedArticle}
+            articleUpdated={articleUpdated}
+            articleInserted={articleInserted}
+          />
+        )
+      }
     </div>
   );
 }

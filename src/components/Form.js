@@ -1,18 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import APIService from "../APIService";
 
 function Form(props) {
   const [title, setTitle] = useState(props.article.title);
   const [description, setDescription] = useState(props.article.description);
 
+  useEffect(() => {
+    // Scroll to Insert Form
+    !props.article.id && scrollTo(formRef)
+  })
+
+  const formRef = useRef(null)
+  const scrollTo = (ref) => {
+    ref.current && ref.current.scrollIntoView()
+    return true
+  }
+
   const updateArticle = () => {
     APIService.UpdateArticle(props.article.id, { title, description }).then(
-      (res) => props.updateArticles(res)
+      (res) => props.articleUpdated(res)
+    );
+  };
+
+  const insertArticle = () => {
+    APIService.InsertArticle({ title, description }).then(
+      (res) => props.articleInserted(res)
     );
   };
 
   return (
     <div>
+      <div ref={formRef} />
       {props.article ? (
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
@@ -40,9 +58,16 @@ function Form(props) {
 
           <br />
 
-          <button className="btn btn-success" onClick={updateArticle}>
-            Update Article
-          </button>
+          {props.article.id ?
+            <button className="btn btn-success" onClick={updateArticle}>
+              Update Article
+            </button>
+            :
+            <button className="btn btn-success" onClick={insertArticle}>
+              Add Article
+            </button>
+          }
+
         </div>
       ) : null}
     </div>
