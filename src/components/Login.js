@@ -16,9 +16,21 @@ function Login() {
     }
   }, [token]);
 
+  const getTimeAfterMinutes = (minutes) => {
+    let expires = new Date();
+    expires.setTime(expires.getTime() + minutes * 60 * 1000);
+
+    return expires;
+  };
+
   const loginBtn = () => {
     APIService.LoginUser({ username, password })
-      .then((res) => setToken("userToken", res.token))
+      .then((res) =>
+        setToken("userToken", res.token, {
+          path: "/",
+          expires: getTimeAfterMinutes(15),
+        })
+      )
       .catch((error) => console.error(error));
   };
 
