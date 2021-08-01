@@ -1,22 +1,32 @@
 const API_URL_ARTICLE = "http://localhost:8000/api/articles/";
-const USER_TOKEN = "REPLACE_WITH_YOUR_TOKEN";
-const HEADER = {
-  'Content-Type': "application/json",
-  'Authorization': `Token ${USER_TOKEN}`,
-};
+const API_URL_LOGIN = "http://localhost:8000/auth/";
+
+function getCookie(key) {
+  var b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
+  return b ? b.pop() : "";
+}
+
+function getHeader() {
+  const header = {
+    "Content-Type": "application/json",
+    Authorization: `Token ${getCookie("userToken")}`,
+  };
+
+  return header;
+}
 
 export default class APIService {
   static FetchArticles() {
     return fetch(API_URL_ARTICLE, {
       method: "GET",
-      headers: HEADER,
+      headers: getHeader(),
     });
   }
 
   static InsertArticle(body) {
     return fetch(API_URL_ARTICLE, {
       method: "POST",
-      headers: HEADER,
+      headers: getHeader(),
       body: JSON.stringify(body),
     }).then((res) => res.json());
   }
@@ -24,7 +34,7 @@ export default class APIService {
   static UpdateArticle(article_id, body) {
     return fetch(`${API_URL_ARTICLE}${article_id}/`, {
       method: "PUT",
-      headers: HEADER,
+      headers: getHeader(),
       body: JSON.stringify(body),
     }).then((res) => res.json());
   }
@@ -32,7 +42,15 @@ export default class APIService {
   static DeleteArticle(article_id) {
     return fetch(`${API_URL_ARTICLE}${article_id}/`, {
       method: "DELETE",
-      headers: HEADER,
-    })
+      headers: getHeader(),
+    });
+  }
+
+  static LoginUser(body) {
+    return fetch(API_URL_LOGIN, {
+      method: "POST",
+      headers: getHeader(),
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
   }
 }
