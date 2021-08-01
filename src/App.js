@@ -35,6 +35,19 @@ function App() {
     setSelectedArticle({ 'title': '', 'description': '' });
   };
 
+  const deleteBtn = (deletedArticle) => {
+    const newArticles = articles.filter(article => {
+      if (article.id === deletedArticle.id) {
+        return false
+      }
+      else {
+        return true;
+      }
+    })
+
+    setArticles(newArticles);
+  };
+
   const articleUpdated = (updatedArticle) => {
     const newArticles = articles.map((article) => {
       if (article.id === updatedArticle.id) {
@@ -76,6 +89,7 @@ function App() {
           <ArticleList
             articles={articles}
             editBtn={editBtn}
+            deleteBtn={deleteBtn}
             selectedArticle={selectedArticle}
             articleUpdated={articleUpdated}
             articleInserted={articleInserted}

@@ -1,11 +1,17 @@
 import React from "react";
 import Form from "./Form";
+import APIService from "../APIService";
 
 function ArticleList(props) {
   const { articles, selectedArticle, articleUpdated, articleInserted } = props;
 
   const editBtn = (article) => {
     props.editBtn(article);
+  };
+
+  const deleteBtn = (article) => {
+    APIService.DeleteArticle(article.id)
+      .then(props.deleteBtn(article))
   };
 
   return (
@@ -27,7 +33,7 @@ function ArticleList(props) {
                   </button>
                 </div>
                 <div className="col">
-                  <button className="btn btn-danger">Delete</button>
+                  <button className="btn btn-danger" onClick={() => deleteBtn(article)}>Delete</button>
                 </div>
               </div>
               {selectedArticle && selectedArticle.id === article.id && (

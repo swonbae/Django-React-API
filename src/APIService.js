@@ -28,4 +28,11 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((res) => res.json());
   }
+
+  static DeleteArticle(article_id) {
+    return fetch(`${API_URL_ARTICLE}${article_id}/`, {
+      method: "DELETE",
+      headers: HEADER,
+    })
+  }
 }
