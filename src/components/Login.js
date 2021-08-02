@@ -8,6 +8,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useCookies(["userToken"]);
+  const [isLogin, setIsLogin] = useState(true);
   let history = useHistory();
 
   useEffect(() => {
@@ -34,13 +35,17 @@ function Login() {
       .catch((error) => console.error(error));
   };
 
+  const registerBtn = () => {
+    APIService.RegisterUser({ username, password })
+      .then(() => loginBtn())
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="App">
       <br />
       <br />
-
-      <h1>Please Login</h1>
-
+      {isLogin ? <h1>Please Login</h1> : <h1>Please Register</h1>}
       <br />
       <br />
 
@@ -71,9 +76,43 @@ function Login() {
         />
       </div>
 
-      <button className="btn btn-primary" onClick={loginBtn}>
-        Login
-      </button>
+      {isLogin ? (
+        <button className="btn btn-primary" onClick={loginBtn}>
+          Login
+        </button>
+      ) : (
+        <button className="btn btn-primary" onClick={registerBtn}>
+          Register
+        </button>
+      )}
+
+      <div className="mb-3">
+        <br />
+        <br />
+        {isLogin ? (
+          <h5>
+            If You Don't Have Account, Please{" "}
+            <button
+              className="btn btn-primary"
+              onClick={() => setIsLogin(false)}
+            >
+              Register
+            </button>{" "}
+            Here
+          </h5>
+        ) : (
+          <h5>
+            If You Have Account, Please{" "}
+            <button
+              className="btn btn-primary"
+              onClick={() => setIsLogin(true)}
+            >
+              Login
+            </button>{" "}
+            Here
+          </h5>
+        )}
+      </div>
     </div>
   );
 }

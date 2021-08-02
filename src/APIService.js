@@ -1,5 +1,7 @@
-const API_URL_ARTICLE = "http://localhost:8000/api/articles/";
-const API_URL_LOGIN = "http://localhost:8000/auth/";
+const SERVER_URL = "http://localhost:8000/";
+const API_URL_ARTICLE = SERVER_URL + "api/articles/";
+const API_URL_LOGIN = SERVER_URL + "auth/";
+const API_URL_REGISTER = SERVER_URL + "api/users/";
 
 function getCookie(key) {
   var b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
@@ -48,6 +50,14 @@ export default class APIService {
 
   static LoginUser(body) {
     return fetch(API_URL_LOGIN, {
+      method: "POST",
+      headers: getHeader(),
+      body: JSON.stringify(body),
+    }).then((res) => res.json());
+  }
+
+  static RegisterUser(body) {
+    return fetch(API_URL_REGISTER, {
       method: "POST",
       headers: getHeader(),
       body: JSON.stringify(body),
