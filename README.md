@@ -1,6 +1,6 @@
 # DjangoReactAPI
 Full Stack in Python and ReactJS Practice (Back-end API using Django REST Framework + Front-end using ReactJS)\
-`main` branch = Django Back-end, `React` branch = React Front-end code
+`Django` branch = Django Back-end, `React` branch = React Front-end code
 
 ## Django Setup
 
