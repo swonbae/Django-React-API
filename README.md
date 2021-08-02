@@ -23,7 +23,6 @@ python manage.py createsuperuser
 
 Run server
 ```sh
-cd
 python manage.py runserver
 ```
 Admin Page URL: `http://localhost:8000/admin`\
