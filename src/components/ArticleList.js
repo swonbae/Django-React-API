@@ -10,8 +10,7 @@ function ArticleList(props) {
   };
 
   const deleteBtn = (article) => {
-    APIService.DeleteArticle(article.id)
-      .then(props.deleteBtn(article))
+    APIService.DeleteArticle(article.id).then(props.deleteBtn(article));
   };
 
   return (
@@ -26,14 +25,19 @@ function ArticleList(props) {
               <div className="row">
                 <div className="col-md-1">
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-warning"
                     onClick={() => editBtn(article)}
                   >
                     Edit
                   </button>
                 </div>
                 <div className="col">
-                  <button className="btn btn-danger" onClick={() => deleteBtn(article)}>Delete</button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteBtn(article)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
               {selectedArticle && selectedArticle.id === article.id && (
@@ -45,15 +49,10 @@ function ArticleList(props) {
               <hr className="hrclass" />
             </div>
           );
-        })
-      }
-      {
-        selectedArticle && !selectedArticle.id &&
-        <Form
-          article={selectedArticle}
-          articleInserted={articleInserted}
-        />
-      }
+        })}
+      {selectedArticle && !selectedArticle.id && (
+        <Form article={selectedArticle} articleInserted={articleInserted} />
+      )}
     </div>
   );
 }

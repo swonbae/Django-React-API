@@ -94,7 +94,7 @@ function App() {
           </button>
         </div>
         <div className="col">
-          <button className="btn btn-primary" onClick={logoutBtn}>
+          <button className="btn btn-secondary" onClick={logoutBtn}>
             Logout
           </button>
         </div>

@@ -9,6 +9,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [token, setToken] = useCookies(["userToken"]);
   const [isLogin, setIsLogin] = useState(true);
+  const [message, setMessage] = useState();
   let history = useHistory();
 
   useEffect(() => {
@@ -16,6 +17,10 @@ function Login() {
       history.push("/articles");
     }
   }, [token]);
+
+  useEffect(() => {
+    setMessage();
+  }, [isLogin]);
 
   const getTimeAfterMinutes = (minutes) => {
     let expires = new Date();
@@ -27,10 +32,12 @@ function Login() {
   const loginBtn = () => {
     APIService.LoginUser({ username, password })
       .then((res) =>
-        setToken("userToken", res.token, {
-          path: "/",
-          expires: getTimeAfterMinutes(15),
-        })
+        res.token
+          ? setToken("userToken", res.token, {
+              path: "/",
+              expires: getTimeAfterMinutes(15),
+            })
+          : setMessage("Cannot Login with Username and Password")
       )
       .catch((error) => console.error(error));
   };
@@ -76,6 +83,8 @@ function Login() {
         />
       </div>
 
+      {message && <div className="alert text-danger">{message}</div>}
+
       {isLogin ? (
         <button className="btn btn-primary" onClick={loginBtn}>
           Login
@@ -93,7 +102,7 @@ function Login() {
           <h5>
             If You Don't Have Account, Please{" "}
             <button
-              className="btn btn-primary"
+              className="btn btn-secondary"
               onClick={() => setIsLogin(false)}
             >
               Register
@@ -104,7 +113,7 @@ function Login() {
           <h5>
             If You Have Account, Please{" "}
             <button
-              className="btn btn-primary"
+              className="btn btn-secondary"
               onClick={() => setIsLogin(true)}
             >
               Login
